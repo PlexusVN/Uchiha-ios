@@ -52,7 +52,7 @@ final class AppViewModel: NSObject, ObservableObject {
     private let defaults = UserDefaults.standard
     private let keyKey = "saved_license_key"
 
-    init() {
+    override init() {
         loadSavedKey()
         startFpsMonitor()
     }
