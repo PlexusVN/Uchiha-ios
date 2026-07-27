@@ -13,8 +13,6 @@ targets:
     platform: iOS
     sources:
       - path: Sources/UchihaUltralock
-      - path: Sources/UchihaUltralock/Assets.xcassets
-        type: folder
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.ultralock.ios
