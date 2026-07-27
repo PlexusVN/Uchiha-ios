@@ -15,7 +15,7 @@ struct DeviceUtils {
         uname(&systemInfo)
         let mirror = Mirror(reflecting: systemInfo.machine)
         let bytes = mirror.children.compactMap { $0.value as? Int8 }
-        return String(cString: bytes).trimmingCharacters(in: .whitespacesAndNulls)
+        return String(cString: bytes).trimmingCharacters(in: .whitespaces)
     }
 
     static var osVersion: String { UIDevice.current.systemVersion }
