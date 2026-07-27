@@ -1,0 +1,39 @@
+name: Ultralock
+options:
+  bundleIdPrefix: com.aistudio.ultralock
+  deploymentTarget:
+    iOS: "16.0"
+  xcodeVersion: "16.0"
+  generateEmptyDirectories: true
+  groupSortPosition: top
+
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    TARGETED_DEVICE_FAMILY: "1,2"
+    INFOPLIST_FILE: Ultralock/Info.plist
+    INFOPLIST_KEY_UIApplicationSceneManifest:
+      UIApplicationSupportsMultipleScenes: false
+      UISceneConfigurations:
+        UIWindowSceneSessionRoleApplication:
+          - UISceneConfigurationName: Default Configuration
+            UISceneDelegateClassName: $(PRODUCT_MODULE_NAME).SceneDelegate
+    INFOPLIST_KEY_UILaunchStoryboardName: LaunchScreen
+    INFOPLIST_KEY_UIRequiredDeviceCapabilities: [armv7]
+    INFOPLIST_KEY_CFBundleDisplayName: Uchiha Ultralock
+    INFOPLIST_KEY_CFBundleName: Uchiha Ultralock
+
+targets:
+  Ultralock:
+    type: application
+    platform: iOS
+    sources:
+      - path: Ultralock
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.aistudio.ultralock.ios
+        INFOPLIST_KEY_UIRequiredDeviceCapabilities: [arm64]
+        TARGETED_DEVICE_FAMILY: "1"
+        DEVELOPMENT_TEAM: ""
+        CODE_SIGN_STYLE: Automatic
+    dependencies: []
