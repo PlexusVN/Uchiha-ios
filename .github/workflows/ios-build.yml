@@ -59,7 +59,8 @@ jobs:
             -sdk iphoneos \
             -configuration Release \
             CODE_SIGNING_ALLOWED=NO \
-            CONFIGURATION_BUILD_DIR=build/device
+            CONFIGURATION_BUILD_DIR=build/device \
+            ASSETCATALOG_COMPILER_APPICON_NAME=
         working-directory: ${{ env.PROJECT_NAME }}
 
       - name: Package .app into .ipa
