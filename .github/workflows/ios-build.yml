@@ -51,31 +51,29 @@ jobs:
         run: xcodegen generate
         working-directory: ${{ env.PROJECT_NAME }}
 
-      - name: Build for iOS Simulator
+      - name: Build for iOS Device (unsigned .app)
         run: |
           xcodebuild clean build \
             -project Ultralock.xcodeproj \
             -scheme Ultralock \
-            -sdk iphonesimulator \
-            -destination "generic/platform=iOS Simulator,name=iPhone 16 Pro,OS=latest" \
-            CODE_SIGNING_ALLOWED=NO
+            -sdk iphoneos \
+            -configuration Release \
+            CODE_SIGNING_ALLOWED=NO \
+            CONFIGURATION_BUILD_DIR=build/device
         working-directory: ${{ env.PROJECT_NAME }}
 
-      - name: Archive for Release
-        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+      - name: Package .app into .ipa
         run: |
-          xcodebuild archive \
-            -project Ultralock.xcodeproj \
-            -scheme Ultralock \
-            -configuration Release \
-            -archivePath build/Ultralock.xcarchive \
-            CODE_SIGNING_ALLOWED=NO
+          mkdir -p build/Payload
+          cp -r build/device/Ultralock.app build/Payload/
+          cd build && zip -qr Ultralock.ipa Payload/
+          rm -rf Payload
         working-directory: ${{ env.PROJECT_NAME }}
 
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: Ultralock-Build
+          name: Ultralock-IPA
           path: |
-            ${{ env.PROJECT_NAME }}/build/
+            ${{ env.PROJECT_NAME }}/build/Ultralock.ipa
           retention-days: 7
